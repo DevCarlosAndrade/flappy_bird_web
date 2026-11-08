@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#0b1320">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Flappy 3D</title>
+<link rel="stylesheet" href="css/flappy.css">
+</head>
+<body>
+<div id="janela">
+ <div id="giro" class="abertura">
+  <div id="palco">
+   <canvas id="canvasJogo"></canvas>
+
+   <div id="interface">
+     <div id="etiqueta">Normal</div>
+     <div id="placar">0</div>
+     <button id="btnPausar" aria-label="Pausar">❚❚</button>
+   </div>
+   <div id="contagem"></div>
+
+   <!-- MENU -->
+   <section class="tela ativa" id="telaMenu">
+     <div class="entrada" style="--ordem:0"><h1 class="logo">FLAPPY<small>BIRD 3D</small></h1></div>
+     <div class="botoesMenu">
+       <button class="botao grande entrada" id="btnJogar" style="--ordem:2">JOGAR</button>
+       <div class="entrada envoltorioSobre" style="--ordem:3">
+         <button class="botao sobre" id="btnSobre">😎 SOBRE</button>
+         <span class="selo">NOVO!</span>
+       </div>
+       <div class="linhaBotoes opcoesAudio entrada" style="--ordem:4">
+         <button class="botao pequeno" id="btnSom">🔊 Som: ligado</button>
+         <button class="botao pequeno" id="btnMusica">🎵 Música: ligada</button>
+       </div>
+       <p class="dica entrada" style="--ordem:5">Toque na tela para bater as asas</p>
+     </div>
+   </section>
+
+   <!-- SOBRE -->
+   <section class="tela" id="telaSobre">
+     <span class="flutuante" style="top:5%;left:6%;--atraso:0s">🐛</span>
+     <span class="flutuante" style="top:12%;right:7%;--atraso:1.2s">☕</span>
+     <span class="flutuante" style="top:46%;left:2%;--atraso:2.4s">⭐</span>
+     <span class="flutuante" style="top:58%;right:3%;--atraso:3.1s">🎮</span>
+     <span class="flutuante" style="bottom:12%;left:8%;--atraso:4s">🐤</span>
+
+     <h2 class="titulo entrada" style="--ordem:0">QUEM FEZ ISSO?!</h2>
+
+     <div class="entrada" style="--ordem:1">
+       <div class="cartaoDev" id="cartaoDev">
+         <div class="cabecaDev">
+           <div class="fotoWrap">
+             <div class="moldura" id="molduraDev" title="Cutuque o Catatau!">
+               <img id="fotoDev" src="img/catatau.png" alt="Catatau dev acenando">
+             </div>
+           </div>
+           <div class="infoDev">
+             <h3 class="nomeDev">CATATAU<small>DEV</small></h3>
+             <div class="selos">
+               <span style="--c1:#ff9fb2;--c2:#f0647f">💻 Programador</span>
+               <span style="--c1:#5cc9d6;--c2:#2d9bb0">🎧 Fones sempre on</span>
+               <span style="--c1:#9be04f;--c2:#4aa650">🎮 Gamer sofredor</span>
+             </div>
+           </div>
+         </div>
+
+         <div class="balao"><p id="falaDev">Olá, jogador. Esse game foi desenvolvido pelo <strong>Catatau dev</strong> (com uma ajudinha da IA). Espero que se divirta (<s>e passe raiva</s>)</p></div>
+
+         <div class="estatisticas">
+           <div class="estat"><i>☕</i><b>∞</b><small>Cafés</small></div>
+           <div class="estat"><i>🐛</i><b>0</b><small>Bugs (só "features")</small></div>
+           <div class="estat"><i>😡</i><b>100%</b><small>Raiva esperada</small><div class="barra"><span></span></div></div>
+         </div>
+       </div>
+     </div>
+
+     <p class="dicaDev entrada" style="--ordem:2">👆 Cutuque o Catatau, ele reage!</p>
+     <button class="botao pequeno entrada" id="btnVoltarSobre" style="--ordem:3">← Voltar</button>
+   </section>
+
+   <!-- NÍVEIS -->
+   <section class="tela" id="telaNiveis">
+     <h2 class="titulo entrada" style="--ordem:0">Escolha o nível</h2>
+     <button class="cartao entrada" data-nivel="facil" style="--ordem:1;--cor1:#ff9fb2;--cor2:#f0647f">
+       <span class="icone">🌅</span>
+       <span class="texto"><b>Fácil</b><small>Canos largos · ritmo suave</small><i class="pontos">●○○○</i></span>
+       <span class="recorde">🏆<i data-recorde="facil">0</i></span></button>
+     <button class="cartao entrada" data-nivel="normal" style="--ordem:2;--cor1:#5cc9d6;--cor2:#2d9bb0">
+       <span class="icone">🐤</span>
+       <span class="texto"><b>Normal<em>CLÁSSICO</em></b><small>A experiência original</small><i class="pontos">●●○○</i></span>
+       <span class="recorde">🏆<i data-recorde="normal">0</i></span></button>
+     <button class="cartao entrada" data-nivel="dificil" style="--ordem:3;--cor1:#ff8a3d;--cor2:#b8341c">
+       <span class="icone">🦇</span>
+       <span class="texto"><b>Difícil</b><small>Canos móveis · morcegos</small><i class="pontos">●●●○</i></span>
+       <span class="recorde">🏆<i data-recorde="dificil">0</i></span></button>
+     <button class="cartao entrada" data-nivel="insano" style="--ordem:4;--cor1:#8a4fff;--cor2:#3a1478">
+       <span class="icone">🔥</span>
+       <span class="texto"><b>Insano</b><small>Espinhos giratórios · bolas de fogo · tudo!</small><i class="pontos">●●●●</i></span>
+       <span class="recorde">🏆<i data-recorde="insano">0</i></span></button>
+     <button class="botao pequeno entrada" id="btnVoltar" style="--ordem:5">← Voltar</button>
+   </section>
+
+   <!-- PRONTO -->
+   <section class="tela" id="telaPronto">
+     <h2 class="preparese">PREPARE-SE!</h2>
+     <div class="toque"><div class="dedo"></div>Toque para voar</div>
+   </section>
+
+   <!-- PAUSA -->
+   <section class="tela" id="telaPausa">
+     <h2 class="titulo entrada" style="--ordem:0">PAUSADO</h2>
+     <button class="botao verde entrada" id="btnContinuar" style="--ordem:1">Continuar</button>
+     <button class="botao pequeno entrada" id="btnPausaMenu" style="--ordem:2">Menu</button>
+   </section>
+
+   <!-- FIM DE JOGO -->
+   <section class="tela" id="telaFim">
+     <h2 class="titulo entrada" style="--ordem:0">FIM DE JOGO</h2>
+     <div class="painel entrada" style="--ordem:1">
+       <div class="medalha nenhuma" id="medalha"></div>
+       <div class="linha"><span>PONTOS</span><b id="fimPontos">0</b></div>
+       <div class="linha"><span>MELHOR</span><span><u id="fimNovo">NOVO!</u> <b id="fimRecorde">0</b></span></div>
+       <div class="linha linhaNivel" id="fimNivel"></div>
+     </div>
+     <button class="botao verde entrada" id="btnNovamente" style="--ordem:2">Jogar de novo</button>
+     <div class="linhaBotoes entrada" style="--ordem:3">
+       <button class="botao pequeno" id="btnNiveis">Níveis</button>
+       <button class="botao pequeno" id="btnMenu">Menu</button>
+     </div>
+   </section>
+  </div>
+ </div>
+</div>
+
+<script src="js/flappy.js"></script>
+</body>
+</html>
