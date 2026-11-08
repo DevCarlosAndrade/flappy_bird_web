@@ -102,7 +102,7 @@ button{font-family:inherit}
 /* Seleção de nível */
 #telaNiveis{gap:1em;padding:2em 0}
 .titulo{margin:0 0 .2em;font-size:3.4em;color:#fff;-webkit-text-stroke:.05em var(--contorno);paint-order:stroke fill;text-shadow:0 .06em 0 var(--contorno),0 .14em .15em rgba(0,0,0,.45)}
-.cartao{display:flex;align-items:center;gap:.9em;width:33em;padding:.8em 1em;border-radius:1em;border:.15em solid var(--contorno);color:#fff;text-align:left;cursor:pointer;
+.cartao{font-size:1em;display:flex;align-items:center;gap:.9em;width:min(33em,92%);padding:.8em 1em;border-radius:1em;border:.15em solid var(--contorno);color:#fff;text-align:left;cursor:pointer;
   background:linear-gradient(135deg,var(--cor1),var(--cor2));box-shadow:0 .35em 0 rgba(0,0,0,.4),0 .7em 1em rgba(0,0,0,.35),inset 0 .12em 0 rgba(255,255,255,.4);
   transition:transform .15s,box-shadow .15s}
 .cartao:hover{transform:perspective(60em) rotateY(-5deg) scale(1.03)}
